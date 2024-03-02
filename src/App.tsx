@@ -1,5 +1,9 @@
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
+interface data {
+  example: string;
+  exampleRequired: string;
+}
 
 export default function App() {
   const {
@@ -7,14 +11,11 @@ export default function App() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
+  const onSubmit = (data: data) => console.log(data);
 
-  const onSubmit = (data) => console.log(data)
-
-
-  console.log(watch("example")) // watch input value by passing the name of it
-
+  console.log(watch("example")); // watch input value by passing the name of it
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -22,14 +23,12 @@ export default function App() {
       {/* register your input into the hook by invoking the "register" function */}
       <input defaultValue="test" {...register("example")} />
 
-
       {/* include validation with required or other standard HTML validation rules */}
       <input {...register("exampleRequired", { required: true })} />
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
 
-
       <input type="submit" />
     </form>
-  )
+  );
 }
