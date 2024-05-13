@@ -1,6 +1,6 @@
-import { useForm } from "react-hook-form";
+import { type SubmitHandler, useForm } from "react-hook-form";
 
-interface data {
+interface Data {
   example: string;
   exampleRequired: string;
 }
@@ -9,13 +9,13 @@ export default function App() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm<Data>();
 
-  const onSubmit = (data: data) => console.log(data);
-
-  console.log(watch("example")); // watch input value by passing the name of it
+  const onSubmit: SubmitHandler<Data> = (data: Data) => {
+    console.log('data =', data);
+    console.log('register =', register("example"));
+  };
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
